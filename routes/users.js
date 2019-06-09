@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.post('/join', function(req, res, next) {
+  var email = req.body.email;
+  
+  res.cookie('saveto',email, { maxAge: 900000, httpOnly: false });
+
+  res.redirect('back');
 });
 
 module.exports = router;

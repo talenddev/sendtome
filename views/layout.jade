@@ -2,6 +2,23 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.min.css')
+    block extra_header
+  body    
+    //- script(src='/js/jquery.js')
+    //- script(src='/js/bootstrap-transition.js')
+    //- script(src='/js/bootstrap-alert.js')
+    //- script(src='/js/bootstrap-modal.js')
+    //- script(src='/js/bootstrap-dropdown.js')
+    //- script(src='/js/bootstrap-scrollspy.js')
+    //- script(src='/js/bootstrap-tab.js')
+    //- script(src='/js/bootstrap-tooltip.js')
+    //- script(src='/js/bootstrap-popover.js')
+    //- script(src='/js/bootstrap-button.js')
+    //- script(src='/js/bootstrap-collapse.js')
+    //- script(src='/js/bootstrap-carousel.js')
+    //- script(src='/js/bootstrap-typeahead.js')
     block content
