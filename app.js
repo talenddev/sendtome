@@ -10,6 +10,27 @@ var sendRouter = require('./routes/send');
 
 var app = express();
 
+// favicon
+var favicon = require('serve-favicon')
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
+// session
+var cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.KEY1 || 'abc',process.env.KEY1 || 'cde'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
+
+// Update a value in the cookie so that the set-cookie will be sent.
+// Only changes every minute so that it's not sent with every request.
+app.use(function (req, res, next) {
+  req.session.nowInMinutes = Math.floor(Date.now() / 60e3)
+  next()
+})
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -29,15 +50,13 @@ app.use('/', usersRouter);
 /* logged? */
 app.use(function (req, res, next) {
   // check if client sent cookie
-  var cookie = req.cookies.saveto;
-  if (cookie === undefined)
-  {
-    // TODO: validate cookie
-    res.render('join', { title: 'F save it' });
-  } else {
+  if(req.session.saveto) {
+    console.debug(req.session.saveto)
     next();
   }
-  
+  else{
+    res.render('join', { title: 'F save it' });
+  }
 });
 
 // Routes
